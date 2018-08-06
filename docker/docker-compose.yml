@@ -1,0 +1,26 @@
+version: "3"
+
+services:
+  mysql_test4:
+    container_name: mysql_test4
+    build: ./mysql
+    image: weibaoer/mysql:5.6
+    ports:
+      - "3306:3306"
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+
+  exam1_test4:
+    container_name: exam1_test4
+    build: ./java
+    image: weibaoer/exam1:v1
+    environment:
+      countryId: 2
+      customerId: 628
+      MYSQL_IP: mysql_test4
+      MYSQL_PORT: 3306
+    depends_on:
+      - mysql_test4
+    links:
+      - mysql_test4
+
