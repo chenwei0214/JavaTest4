@@ -67,7 +67,7 @@ public class Application {
     public static void main(String[] args) {
         Application application = new Application();
 
-        /*Map<String, String> map = System.getenv();
+        Map<String, String> map = System.getenv();
         String title = map.get("title");
         String description = map.get("description");
         String languageId = map.get("languageId");
@@ -87,11 +87,10 @@ public class Application {
         filmDO.setReleaseYear(2018);
         filmDO.setRentalRate(new BigDecimal(2.99));
         filmDO.setRentalDuration(5);
-        filmDO.setReplacementCost(new BigDecimal(15.99));*/
+        filmDO.setReplacementCost(new BigDecimal(15.99));
 
-       application.testCreateFilm();
-//        application.getEvnAndInsertFilmOk(filmDO);
+        application.getEvnAndInsertFilmOk(filmDO);
         //抛出异常
-//        application.getEvnAndInsertFilmErr(filmDO);
+        application.getEvnAndInsertFilmErr(filmDO);
     }
 }
