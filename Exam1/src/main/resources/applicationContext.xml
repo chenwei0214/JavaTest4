@@ -23,11 +23,11 @@
 
 
 
-            <aop:before method="BeforeInsertFilmEvent" pointcut-ref="myPointCut"/>
+            <aop:before method="beforeInsertFilmEvent" pointcut-ref="myPointCut"/>
 
 
 
-            <aop:after-returning method="AfterInsertFilmEvent" pointcut-ref="myPointCut" returning="ret" />
+            <aop:after-returning method="afterInsertFilmEvent" pointcut-ref="myPointCut" returning="ret" />
 
 
              <!--环绕通知-->

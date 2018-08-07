@@ -22,7 +22,6 @@ public class UserServiceImpl implements UserService {
         BeanUtils.copyProperties(userE, userDO);
         userMapper.insert(userDO);
         userE.setId(userDO.getId());
-//        int i = 1 / 0;
     }
 
     @Override

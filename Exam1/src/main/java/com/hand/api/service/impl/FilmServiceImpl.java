@@ -1,6 +1,5 @@
 package com.hand.api.service.impl;
 
-import java.util.Map;
 import javax.annotation.Resource;
 
 import com.hand.api.service.FilmService;
@@ -23,7 +22,7 @@ public class FilmServiceImpl implements FilmService {
     public void getEvnAndInsertFilm(FilmDO filmDO, Boolean throwEx) {
         filmMapper.insert(filmDO);
         if (throwEx) {
-           throw new RuntimeException("手动异常测试事务");
+            throw new RuntimeException("手动异常测试事务");
         }
     }
 

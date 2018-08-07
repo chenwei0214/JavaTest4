@@ -7,15 +7,15 @@ import org.aspectj.lang.ProceedingJoinPoint;
 
 public class MyAspect {
 
-    public void BeforeInsertFilmEvent(JoinPoint joinPoint){
+    public void beforeInsertFilmEvent(JoinPoint joinPoint) {
         System.out.println("\n======Before Insert Film Data======");
     }
 
-    public void AfterInsertFilmEvent(JoinPoint joinPoint,Object ret){
+    public void afterInsertFilmEvent(JoinPoint joinPoint, Object ret) {
         System.out.println("======After Insert Film Data======\n");
     }
 
-    public Object myAround(ProceedingJoinPoint joinPoint) throws Throwable{
+    public Object myAround(ProceedingJoinPoint joinPoint) throws Throwable {
         System.out.println("\n=====BeforeInsertFilmEvent========");
         //手动执行目标方法
         Object obj = joinPoint.proceed();
@@ -24,12 +24,12 @@ public class MyAspect {
         return obj;
     }
 
-    public void myAfterThrowing(JoinPoint joinPoint, Throwable e){
+    public void myAfterThrowing(JoinPoint joinPoint, Throwable e) {
         System.out.println("抛出异常通知 ： " + e.getMessage());
     }
 
 
-    public void myAfter(JoinPoint joinPoint){
+    public void myAfter(JoinPoint joinPoint) {
 
         System.out.println(joinPoint.getSignature());
 

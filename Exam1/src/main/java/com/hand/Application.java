@@ -5,8 +5,6 @@ import java.util.Date;
 import java.util.Map;
 
 import com.hand.api.service.FilmService;
-import com.hand.api.service.UserService;
-import com.hand.domain.entity.UserE;
 import com.hand.infra.config.CustomCloseSpringListener;
 import com.hand.infra.config.CustomStartSpringListener;
 import com.hand.infra.dataobject.FilmDO;
@@ -21,37 +19,6 @@ public class Application {
         this.context = new ClassPathXmlApplicationContext(resources);
         this.context.addApplicationListener(new CustomCloseSpringListener());
         this.context.addApplicationListener(new CustomStartSpringListener());
-
-    }
-
-    public void testSelectUser() {
-        UserE user = new UserE();
-        user.setUsername("bbbb");
-        user.setPassword("12345");
-        user.setEmail("aaxasdasd");
-        UserService userService = this.context.getBean(UserService.class);
-        userService.createUser(user);
-
-
-       /* ActorMapper bean = this.context.getBean(ActorMapper.class);
-        List<ActorDO> all = bean.getAll();
-        all.forEach(target -> System.out.println(target.getFirstName()));*/
-    }
-
-
-    public void testCreateFilm() {
-        FilmService filmService = this.context.getBean(FilmService.class);
-        FilmDO filmDO = new FilmDO();
-        filmDO.setDescription("aaaa");
-        filmDO.setTitle("bbbb");
-        filmDO.setLastUpdate(new Date());
-        filmDO.setLength(4);
-        filmDO.setReleaseYear(2018);
-        filmDO.setLanguageId(1);
-        filmDO.setRentalRate(new BigDecimal(2.99));
-        filmDO.setRentalDuration(5);
-        filmDO.setReplacementCost(new BigDecimal(15.99));
-        filmService.createFilm(filmDO);
     }
 
     public void getEvnAndInsertFilmErr(FilmDO filmDO) {
@@ -66,7 +33,6 @@ public class Application {
 
     public static void main(String[] args) {
         Application application = new Application();
-
         Map<String, String> map = System.getenv();
         String title = map.get("title");
         String description = map.get("description");
@@ -85,9 +51,9 @@ public class Application {
         filmDO.setLastUpdate(new Date());
         filmDO.setLength(4);
         filmDO.setReleaseYear(2018);
-        filmDO.setRentalRate(new BigDecimal(2.99));
+        filmDO.setRentalRate(BigDecimal.valueOf(2.99));
         filmDO.setRentalDuration(5);
-        filmDO.setReplacementCost(new BigDecimal(15.99));
+        filmDO.setReplacementCost(BigDecimal.valueOf(15.99));
 
         application.getEvnAndInsertFilmOk(filmDO);
         //抛出异常
