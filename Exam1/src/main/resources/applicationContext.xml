@@ -1,11 +1,58 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
-       xmlns:context="http://www.springframework.org/schema/context"
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.0.xsd
-	http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.0.xsd">
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="http://www.springframework.org/schema/aop
+    		http://www.springframework.org/schema/aop/spring-aop-4.0.xsd
+    		http://www.springframework.org/schema/beans
+    		http://www.springframework.org/schema/beans/spring-beans-4.0.xsd
+    		http://www.springframework.org/schema/context
+    		http://www.springframework.org/schema/context/spring-context-4.0.xsd">
 
     <!--<context:annotation-config/>-->
     <context:component-scan base-package="com.hand.api.service"/>
+   <!-- <bean class="com.hand.infra.config.CustomCloseSpringListener"></bean>
+    <bean class="com.hand.infra.config.CustomStartSpringListener"></bean>-->
 
+    <bean id="myAspectId" class="com.hand.aspect.MyAspect"></bean>
+
+    <aop:config>
+        <aop:aspect ref="myAspectId">
+            <aop:pointcut expression="execution(* com.hand.infra.mapper.FilmMapper.insert(..))" id="myPointCut"/>
+
+
+
+            <aop:before method="BeforeInsertFilmEvent" pointcut-ref="myPointCut"/>
+
+
+
+            <aop:after-returning method="AfterInsertFilmEvent" pointcut-ref="myPointCut" returning="ret" />
+
+
+             <!--环绕通知-->
+                <!--<aop:around method="" pointcut-ref=""/>-->
+           <!--    通知方法格式：public Object myAround(ProceedingJoinPoint joinPoint) throws Throwable{
+                    返回值类型：Object
+                    方法名：任意
+                    参数：org.aspectj.lang.ProceedingJoinPoint
+                    抛出异常
+                执行目标方法：Object obj = joinPoint.proceed();
+                例如：-->
+            <!--<aop:around method="myAround" pointcut-ref="myPointCut"/>-->
+
+            <!-- 3.4 抛出异常
+                <aop:after-throwing method="" pointcut-ref="" throwing=""/>
+                    throwing ：通知方法的第二个参数名称
+                通知方法格式：public void myAfterThrowing(JoinPoint joinPoint,Throwable e){
+                    参数1：连接点描述对象
+                    参数2：获得异常信息，类型Throwable ，参数名由throwing="e" 配置
+                例如：
+            <aop:after-throwing method="myAfterThrowing" pointcut-ref="myPointCut" throwing="e"/>
+            -->
+            <!-- 3.5 最终通知 -->
+            <!--<aop:after method="myAfter" pointcut-ref="myPointCut"/>-->
+
+        </aop:aspect>
+    </aop:config>
 </beans>

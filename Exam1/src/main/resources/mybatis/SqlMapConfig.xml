@@ -3,7 +3,16 @@
         "-//mybatis.org//DTD Config 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-config.dtd">
 <configuration>
+    <!--    <settings>
+            &lt;!&ndash;打印sql语句&ndash;&gt;
+            <setting name="logImpl" value="STDOUT_LOGGING" />
+        </settings>-->
     <typeAliases>
-        <package name="com.hand.domain.entity" />
+        <package name="com.hand.infra.dataobject"/>
     </typeAliases>
+
+    <plugins>
+        <plugin interceptor="com.hand.infra.config.MyInterceptor">
+        </plugin>
+    </plugins>
 </configuration>

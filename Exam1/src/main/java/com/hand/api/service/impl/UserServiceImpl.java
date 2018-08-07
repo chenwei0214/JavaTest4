@@ -15,12 +15,14 @@ public class UserServiceImpl implements UserService {
     @Resource
     private UserMapper userMapper;
 
+
     @Override
     public void createUser(UserE userE) {
         UserDO userDO = new UserDO();
         BeanUtils.copyProperties(userE, userDO);
         userMapper.insert(userDO);
         userE.setId(userDO.getId());
+//        int i = 1 / 0;
     }
 
     @Override

@@ -1,8 +1,8 @@
 version: "3"
 
 services:
-  mysql_test4:
-    container_name: mysql_test4
+  mysql:
+    container_name: mysql
     build: ./mysql
     image: weibaoer/mysql:5.6
     ports:
@@ -10,17 +10,18 @@ services:
     environment:
       MYSQL_ROOT_PASSWORD: root
 
-  exam1_test4:
-    container_name: exam1_test4
+  exam1:
+    container_name: exam1
     build: ./java
     image: weibaoer/exam1:v1
     environment:
-      countryId: 2
-      customerId: 628
-      MYSQL_IP: mysql_test4
+      title: "title_test"
+      description: "description_test"
+      languageId: "1"
+      MYSQL_IP: mysql
       MYSQL_PORT: 3306
     depends_on:
-      - mysql_test4
+      - mysql
     links:
-      - mysql_test4
+      - mysql
 

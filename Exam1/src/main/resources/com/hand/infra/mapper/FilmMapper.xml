@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.hand.infra.mapper.FilmMapper">
+
+
+
+    <resultMap id="BaseResultMap" type="com.hand.infra.dataobject.FilmDO">
+        <id column="film_id" property="id" />
+        <result column="title" property="title" />
+        <result column="description" property="description" />
+        <result column="release_year" property="releaseYear" />
+        <result column="language_id" property="languageId" />
+        <result column="original_language_id" property="originalLanguageId" />
+        <result column="rental_duration" property="rentalDuration" />
+        <result column="rental_rate" property="rentalRate" />
+        <result column="length" property="length" />
+        <result column="replacement_cost" property="replacementCost" />
+        <result column="last_update" property="lastUpdate" />
+    </resultMap>
+
+
+    <sql id="Base_Column_List">
+        film_id, title, description, release_year,
+        language_id,original_language_id,rental_duration,rental_rate,length,
+        replacement_cost,last_update
+    </sql>
+
+
+    <insert id="insert" parameterType="com.hand.infra.dataobject.FilmDO">
+        insert into film (title, description, release_year,
+        language_id,original_language_id,rental_duration,rental_rate,length,
+        replacement_cost,last_update)
+        values (#{title}, #{description}, #{releaseYear},
+        #{languageId},#{originalLanguageId},#{rentalDuration},#{rentalRate},#{length},
+        #{replacementCost},#{lastUpdate})
+        <selectKey resultType="java.lang.Integer" order="AFTER" keyProperty="id">
+            select LAST_INSERT_ID()
+        </selectKey>
+    </insert>
+
+    <!--<select id="selectByExample" resultMap="BaseResultMap" parameterType="com.hand.infra.dataobject.UserDO">
+        <bind name="username_pattern" value="'%' + _parameter.username + '%'"/>
+        <bind name="email_pattern" value="'%' + _parameter.email + '%'"/>
+        select
+        <include refid="Base_Column_List"/>
+        from tb_user
+        <where>
+            <if test="id != null">
+                and user_id=#{id}
+            </if>
+            <if test="username != null and username!='' ">
+                and username like #{username_pattern}
+            </if>
+            <if test="email != null and email!='' ">
+                and email like #{email_pattern}
+            </if>
+            <if test="age != null">
+                and age = #{age}
+            </if>
+        </where>
+    </select>-->
+
+
+
+    <!--<select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long">
+        select
+        <include refid="Base_Column_List"/>
+        from tb_user
+        where user_id = #{id,jdbcType=BIGINT}
+    </select>-->
+
+
+    <!--<delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+        delete from tb_user
+        where user_id = #{id,jdbcType=BIGINT}
+    </delete>-->
+
+    <!--<update id="updateByPrimaryKey" parameterType="com.hand.infra.dataobject.UserDO">
+        update tb_user
+        set username = #{username,jdbcType=VARCHAR},
+        password = #{password,jdbcType=VARCHAR},
+        email = #{email,jdbcType=VARCHAR},
+        age = #{age,jdbcType=TINYINT}
+        where user_id = #{id,jdbcType=BIGINT}
+    </update>-->
+
+</mapper>
